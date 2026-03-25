@@ -68,6 +68,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackEvent("whatsapp_click", { location: "hero" })}
+              aria-label="Solicitar orçamento pelo WhatsApp"
               className="cursor-pointer rounded-sm bg-whatsapp px-6 py-3 text-sm font-bold text-white transition-colors duration-200 ease-out hover:bg-whatsapp/85"
             >
               Solicitar Orçamento

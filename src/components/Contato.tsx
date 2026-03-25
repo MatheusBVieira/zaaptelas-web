@@ -118,6 +118,7 @@ export function Contato() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent("whatsapp_click", { location: "contato" })}
+                aria-label="Ligar para WhatsApp (48) 99133-0508"
                 className="inline-block cursor-pointer rounded-sm bg-whatsapp px-8 py-4 text-base font-bold text-white transition-colors duration-200 ease-out hover:bg-whatsapp/85"
               >
                 (48) 99133-0508 · WhatsApp
