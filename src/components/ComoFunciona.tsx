@@ -24,7 +24,7 @@ const etapas = [
   {
     numero: "03",
     titulo: "Instalação rápida",
-    descricao: "Acabamento aprovado na hora. Qualidade garantida.",
+    descricao: "De 2 a 3 dias após a aprovação do orçamento.",
   },
 ];
 
