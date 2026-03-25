@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { href: "#inicio", label: "Início" },
@@ -41,6 +42,7 @@ export function Navbar() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { location: "navbar" })}
               className="rounded-sm bg-whatsapp px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
             >
               Orçamento
@@ -86,6 +88,7 @@ export function Navbar() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent("whatsapp_click", { location: "navbar_mobile" })}
               className="rounded-sm bg-whatsapp px-4 py-2 text-center text-sm font-bold text-white"
             >
               Orçamento
