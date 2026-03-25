@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { trackEvent } from "@/lib/analytics";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 const navLinks = [
   { href: "#inicio", label: "Início" },
@@ -11,9 +11,6 @@ const navLinks = [
   { href: "#galeria", label: "Galeria" },
   { href: "#contato", label: "Contato" },
 ];
-
-const WHATSAPP_URL =
-  "https://wa.me/5548991330508?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,16 +35,12 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent("whatsapp_click", { location: "navbar" })}
-              aria-label="Solicitar orçamento pelo WhatsApp"
-              className="rounded-sm bg-whatsapp px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
+            <WhatsAppButton
+              location="navbar"
+              className="px-4 py-2 text-sm"
             >
               Orçamento
-            </a>
+            </WhatsAppButton>
           </div>
 
           {/* Mobile hamburger */}
@@ -85,16 +78,12 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent("whatsapp_click", { location: "navbar_mobile" })}
-              aria-label="Solicitar orçamento pelo WhatsApp"
-              className="rounded-sm bg-whatsapp px-4 py-2 text-center text-sm font-bold text-white"
+            <WhatsAppButton
+              location="navbar_mobile"
+              className="px-4 py-2 text-center text-sm"
             >
               Orçamento
-            </a>
+            </WhatsAppButton>
           </div>
         </div>
       )}

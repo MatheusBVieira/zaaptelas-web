@@ -1,8 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Shield, Ruler, EyeOff, Leaf } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import {
+  useFadeUp,
+  fadeUpTransition,
+  staggerViewportLoose,
+  staggerChildren,
+} from "@/lib/animations";
 
 interface Diferencial {
   titulo: string;
@@ -38,50 +45,28 @@ const diferenciais: Diferencial[] = [
 ];
 
 export function Diferenciais() {
-  const prefersReducedMotion = useReducedMotion();
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
-    visible: { opacity: 1, y: 0 },
-  };
+  const fadeUp = useFadeUp();
 
   return (
     <section id="diferenciais" className="py-20 bg-creme">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ staggerChildren: 0.1 }}
-        >
-          <motion.h2
-            variants={fadeUp}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="font-display text-3xl font-bold text-escuro sm:text-4xl"
-          >
-            Por que alumínio?
-          </motion.h2>
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="mt-2 text-oliva"
-          >
-            Diferenciais que fazem a diferença no dia a dia.
-          </motion.p>
-        </motion.div>
+        <SectionHeader
+          titulo="Por que alumínio?"
+          subtitulo="Diferenciais que fazem a diferença no dia a dia."
+        />
         <motion.div
           className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ staggerChildren: 0.12 }}
+          viewport={staggerViewportLoose}
+          transition={staggerChildren(0.12)}
         >
           {diferenciais.map((item) => (
             <motion.div
               key={item.titulo}
               variants={fadeUp}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="cursor-pointer border border-escuro/[0.08] p-6 transition-all duration-200 ease-out hover:border-dourado/40 hover:shadow-md hover:-translate-y-0.5"
+              transition={fadeUpTransition}
+              className="border border-escuro/[0.08] p-6 transition-all duration-200 ease-out hover:border-dourado/40 hover:shadow-md hover:-translate-y-0.5"
             >
               <item.Icone
                 className="text-dourado"

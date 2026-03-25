@@ -1,13 +1,18 @@
 "use client";
 
 import { type FormEvent } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY } from "@/lib/constants";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import {
+  useFadeUp,
+  fadeUpTransition,
+  staggerViewportLoose,
+  staggerChildren,
+} from "@/lib/animations";
 import { depoimentos } from "@/data/depoimentos";
-
-const WHATSAPP_NUMBER = "5548991330508";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento`;
 
 const tipoLabels: Record<string, string> = {
   "janela-correr": "Janela de correr",
@@ -16,7 +21,7 @@ const tipoLabels: Record<string, string> = {
   outro: "Outro",
 };
 
-function buildWhatsAppURL(data: {
+function buildFormWhatsAppURL(data: {
   nome: string;
   telefone: string;
   tipo: string;
@@ -36,12 +41,7 @@ function buildWhatsAppURL(data: {
 }
 
 export function Contato() {
-  const prefersReducedMotion = useReducedMotion();
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
-    visible: { opacity: 1, y: 0 },
-  };
+  const fadeUp = useFadeUp();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -54,7 +54,7 @@ export function Contato() {
     };
 
     trackEvent("form_submit", { form_name: "orcamento", tipo: data.tipo });
-    window.open(buildWhatsAppURL(data), "_blank", "noopener,noreferrer");
+    window.open(buildFormWhatsAppURL(data), "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -65,12 +65,12 @@ export function Contato() {
           className="mb-16"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ staggerChildren: 0.1 }}
+          viewport={staggerViewportLoose}
+          transition={staggerChildren()}
         >
           <motion.h2
             variants={fadeUp}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={fadeUpTransition}
             className="font-display text-3xl font-bold text-creme sm:text-4xl"
           >
             O que nossos clientes dizem
@@ -80,7 +80,7 @@ export function Contato() {
               <motion.blockquote
                 key={dep.id}
                 variants={fadeUp}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                transition={fadeUpTransition}
                 className="border-l-2 border-dourado/40 pl-4"
               >
                 <p className="text-sm italic text-creme/80">
@@ -96,13 +96,13 @@ export function Contato() {
           className="grid grid-cols-1 gap-12 lg:grid-cols-2"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ staggerChildren: 0.12 }}
+          viewport={staggerViewportLoose}
+          transition={staggerChildren(0.12)}
         >
           {/* Lado esquerdo: CTA WhatsApp */}
           <motion.div
             variants={fadeUp}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={fadeUpTransition}
             className="flex flex-col justify-center"
           >
             <h2 className="font-display text-3xl font-bold text-creme sm:text-4xl">
@@ -113,16 +113,12 @@ export function Contato() {
               a região sul de Florianópolis.
             </p>
             <div className="mt-8">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("whatsapp_click", { location: "contato" })}
-                aria-label="Ligar para WhatsApp (48) 99133-0508"
-                className="inline-block cursor-pointer rounded-sm bg-whatsapp px-8 py-4 text-base font-bold text-white transition-colors duration-200 ease-out hover:bg-whatsapp/85"
+              <WhatsAppButton
+                location="contato"
+                className="px-8 py-4 text-base"
               >
-                (48) 99133-0508 · WhatsApp
-              </a>
+                {WHATSAPP_DISPLAY} · WhatsApp
+              </WhatsAppButton>
             </div>
             <div className="mt-6 flex items-center gap-4 text-xs text-creme/40">
               <span>Visa</span>
@@ -136,7 +132,7 @@ export function Contato() {
           {/* Lado direito: Formulário → WhatsApp */}
           <motion.div
             variants={fadeUp}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={fadeUpTransition}
           >
             <h3 className="font-display text-xl font-semibold text-creme">
               Monte seu orçamento
@@ -180,7 +176,7 @@ export function Contato() {
                   name="tipo"
                   required
                   defaultValue=""
-                  className="mt-1 w-full cursor-pointer border border-creme/10 bg-creme/5 px-4 py-2.5 text-sm text-creme transition-colors duration-200 focus:border-dourado/60 focus:outline-none"
+                  className="mt-1 w-full border border-creme/10 bg-creme/5 px-4 py-2.5 text-sm text-creme transition-colors duration-200 focus:border-dourado/60 focus:outline-none"
                 >
                   <option value="" disabled className="text-escuro">
                     Selecione o tipo
@@ -213,7 +209,7 @@ export function Contato() {
               </div>
               <button
                 type="submit"
-                className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-sm bg-whatsapp px-6 py-3 text-sm font-bold text-white transition-colors duration-200 ease-out hover:bg-whatsapp/85"
+                className="flex w-full items-center justify-center gap-2 rounded-sm bg-whatsapp px-6 py-3 text-sm font-bold text-white transition-colors duration-200 ease-out hover:bg-whatsapp/85"
               >
                 <MessageCircle size={16} strokeWidth={1.5} aria-hidden="true" />
                 Enviar pelo WhatsApp
@@ -221,13 +217,6 @@ export function Contato() {
             </form>
           </motion.div>
         </motion.div>
-
-        {/* Rodapé */}
-        <div className="mt-16 border-t border-creme/10 pt-8 text-center text-xs text-creme/40">
-          <p>
-            Zaaptelas · CNPJ 20.885.812/0001-79 · Florianópolis, SC
-          </p>
-        </div>
       </div>
     </section>
   );

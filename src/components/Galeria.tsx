@@ -1,21 +1,21 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import {
+  useFadeUp,
+  fadeUpTransition,
+  staggerChildren,
+} from "@/lib/animations";
 import { galeria } from "@/data/galeria";
 
 export function Galeria() {
-  const prefersReducedMotion = useReducedMotion();
+  const fadeUp = useFadeUp();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 24 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
 
   const goPrev = useCallback(() => {
@@ -51,47 +51,30 @@ export function Galeria() {
     <>
       <section id="galeria" className="py-20 bg-creme">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ staggerChildren: 0.1 }}
-          >
-            <motion.h2
-              variants={fadeUp}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="font-display text-3xl font-bold text-escuro sm:text-4xl"
-            >
-              Galeria
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-2 text-oliva"
-            >
-              Trabalhos realizados pela Zaap Telas.
-            </motion.p>
-          </motion.div>
+          <SectionHeader
+            titulo="Galeria"
+            subtitulo="Trabalhos realizados pela Zaap Telas."
+          />
           <motion.div
             className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ staggerChildren: 0.08 }}
+            transition={staggerChildren(0.08)}
           >
             {galeria.map((foto, index) => (
               <motion.div
                 key={foto.id}
                 variants={fadeUp}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                transition={fadeUpTransition}
                 className="cursor-pointer overflow-hidden border border-escuro/[0.08] transition-all duration-200 ease-out hover:border-dourado/40 hover:shadow-md"
-                onClick={() => openLightbox(index)}
+                onClick={() => setLightboxIndex(index)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    openLightbox(index);
+                    setLightboxIndex(index);
                   }
                 }}
                 aria-label={`Abrir foto: ${foto.alt}`}
@@ -132,13 +115,12 @@ export function Galeria() {
           >
             <motion.div
               className="relative mx-4 flex max-h-[85vh] max-w-4xl flex-col items-center"
-              initial={{ scale: prefersReducedMotion ? 1 : 0.95, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: prefersReducedMotion ? 1 : 0.95, opacity: 0 }}
+              exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Imagem no lightbox */}
               <Image
                 src={galeria[lightboxIndex].src}
                 alt={galeria[lightboxIndex].alt}
@@ -159,7 +141,7 @@ export function Galeria() {
             {/* Controles */}
             <button
               onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-              className="absolute top-4 right-4 cursor-pointer rounded-full bg-escuro/50 p-2 text-creme/80 transition-colors duration-200 hover:bg-escuro/80 hover:text-creme"
+              className="absolute top-4 right-4 rounded-full bg-escuro/50 p-2 text-creme/80 transition-colors duration-200 hover:bg-escuro/80 hover:text-creme"
               aria-label="Fechar lightbox"
             >
               <X size={24} strokeWidth={1.5} />
@@ -167,7 +149,7 @@ export function Galeria() {
 
             <button
               onClick={(e) => { e.stopPropagation(); goPrev(); }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-escuro/50 p-2 text-creme/80 transition-colors duration-200 hover:bg-escuro/80 hover:text-creme"
+              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-escuro/50 p-2 text-creme/80 transition-colors duration-200 hover:bg-escuro/80 hover:text-creme"
               aria-label="Foto anterior"
             >
               <ChevronLeft size={28} strokeWidth={1.5} />
@@ -175,7 +157,7 @@ export function Galeria() {
 
             <button
               onClick={(e) => { e.stopPropagation(); goNext(); }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-escuro/50 p-2 text-creme/80 transition-colors duration-200 hover:bg-escuro/80 hover:text-creme"
+              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-escuro/50 p-2 text-creme/80 transition-colors duration-200 hover:bg-escuro/80 hover:text-creme"
               aria-label="Próxima foto"
             >
               <ChevronRight size={28} strokeWidth={1.5} />

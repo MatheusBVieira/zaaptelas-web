@@ -5,6 +5,7 @@ import { Produtos } from "@/components/Produtos";
 import { ComoFunciona } from "@/components/ComoFunciona";
 import { Galeria } from "@/components/Galeria";
 import { Contato } from "@/components/Contato";
+import { Footer } from "@/components/Footer";
 import { SectionIndicator } from "@/components/SectionIndicator";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <Galeria />
         <Contato />
       </main>
+      <Footer />
       <SectionIndicator />
     </>
   );
