@@ -23,13 +23,13 @@ const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 export const metadata: Metadata = {
   title: "Telas Mosquiteiras em Alumínio | Zaap Telas · Florianópolis",
   description:
-    "Telas mosquiteiras em alumínio sob medida para janelas, portas e basculantes. Instalação rápida na Grande Florianópolis. Solicite seu orçamento via WhatsApp.",
+    "Telas mosquiteiras em alumínio sob medida para janelas, portas e basculantes. Instalação rápida no sul da ilha de Florianópolis. Solicite seu orçamento via WhatsApp.",
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
   openGraph: {
     title: "Telas Mosquiteiras em Alumínio | Zaap Telas · Florianópolis",
     description:
-      "Telas mosquiteiras em alumínio sob medida para janelas, portas e basculantes. Instalação rápida na Grande Florianópolis.",
+      "Telas mosquiteiras em alumínio sob medida para janelas, portas e basculantes. Instalação rápida no sul da ilha de Florianópolis.",
     url: SITE_URL,
     siteName: "Zaap Telas",
     locale: "pt_BR",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Telas Mosquiteiras em Alumínio | Zaap Telas · Florianópolis",
     description:
-      "Telas mosquiteiras em alumínio sob medida. Instalação rápida na Grande Florianópolis.",
+      "Telas mosquiteiras em alumínio sob medida. Instalação rápida no sul da ilha de Florianópolis.",
     images: ["/images/og-zaaptelas.jpg"],
   },
   robots: { index: true, follow: true },
@@ -62,7 +62,7 @@ const jsonLd = {
       name: "Zaap Telas",
       legalName: "Zaaptelas",
       description:
-        "Telas mosquiteiras em alumínio sob medida para janelas, portas e basculantes na Grande Florianópolis.",
+        "Telas mosquiteiras em alumínio sob medida para janelas, portas e basculantes no sul da ilha de Florianópolis.",
       url: SITE_URL,
       telephone: "+5548991330508",
       taxID: "20.885.812/0001-79",

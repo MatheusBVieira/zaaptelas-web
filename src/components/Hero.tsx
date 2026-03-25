@@ -43,14 +43,14 @@ export function Hero() {
             className="mt-4 max-w-md text-lg text-creme/70"
           >
             Telas mosquiteiras em alumínio sob medida. Fabricação própria e
-            instalação rápida na Grande Florianópolis.
+            instalação rápida no sul da ilha de Florianópolis.
           </motion.p>
           <motion.p
             variants={fadeUp}
             transition={fadeUpTransition}
             className="mt-2 text-sm text-dourado"
           >
-            Grande Florianópolis · Sob medida · Alumínio
+            Sul da Ilha · Sob medida · Alumínio
           </motion.p>
           <motion.div
             variants={fadeUp}
