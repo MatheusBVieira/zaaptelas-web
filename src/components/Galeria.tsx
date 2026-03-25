@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { galeria } from "@/data/galeria";
 
@@ -95,7 +96,13 @@ export function Galeria() {
                 }}
                 aria-label={`Abrir foto: ${foto.alt}`}
               >
-                <div className="aspect-[4/3] bg-escuro/5" />
+                <Image
+                  src={foto.src}
+                  alt={foto.alt}
+                  width={foto.width}
+                  height={foto.height}
+                  className="w-full object-cover"
+                />
                 {foto.legenda && (
                   <p className="px-4 py-2 text-xs text-escuro/60">
                     {foto.legenda}
@@ -129,8 +136,15 @@ export function Galeria() {
               transition={{ duration: 0.2, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Placeholder para imagem real */}
-              <div className="aspect-[4/3] w-full max-w-4xl bg-escuro/30 border border-creme/10" />
+              {/* Imagem no lightbox */}
+              <Image
+                src={galeria[lightboxIndex].src}
+                alt={galeria[lightboxIndex].alt}
+                width={galeria[lightboxIndex].width}
+                height={galeria[lightboxIndex].height}
+                className="max-h-[75vh] w-auto object-contain"
+                sizes="(max-width: 768px) 95vw, 80vw"
+              />
 
               <p className="mt-3 text-sm text-creme/70">
                 {galeria[lightboxIndex].legenda}

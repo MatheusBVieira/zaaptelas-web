@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { trackEvent } from "@/lib/analytics";
 
 const WHATSAPP_URL =
@@ -88,7 +89,14 @@ export function Hero() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
         >
-          <div className="h-96 w-96 rounded-sm border border-creme/10 bg-creme/5" />
+          <Image
+            src="/images/hero.jpg"
+            alt="Tela mosquiteira em alumínio instalada em janela de correr Florianópolis"
+            width={1600}
+            height={1200}
+            priority
+            className="rounded-sm border border-creme/10 object-cover"
+          />
         </motion.div>
       </div>
     </section>

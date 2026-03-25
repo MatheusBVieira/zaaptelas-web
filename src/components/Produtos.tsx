@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { produtos } from "@/data/produtos";
 
 export function Produtos() {
@@ -49,7 +50,15 @@ export function Produtos() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="group relative cursor-pointer overflow-hidden border border-escuro/[0.08] transition-all duration-200 ease-out hover:border-dourado/40 hover:shadow-md"
             >
-              <div className="aspect-[4/3] bg-escuro/5" />
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={produto.imagem}
+                  alt={`Tela mosquiteira alumínio ${produto.nome.toLowerCase()} Florianópolis`}
+                  width={produto.width}
+                  height={produto.height}
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div className="p-6">
                 <h3 className="font-display text-lg font-semibold text-escuro">
                   {produto.nome}
