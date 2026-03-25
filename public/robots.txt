@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://zaaptelas.com.br
+
+# Sitemaps
+Sitemap: https://zaaptelas.com.br/sitemap.xml
