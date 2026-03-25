@@ -17,6 +17,8 @@ export function SectionIndicator() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
+    // rootMargin encolhe a zona de detecção para uma faixa no centro da viewport,
+    // garantindo que a seção ativa seja a que cruza o meio da tela.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -26,7 +28,7 @@ export function SectionIndicator() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0, rootMargin: "-50% 0px -50% 0px" }
     );
 
     sections.forEach(({ id }) => {
@@ -42,7 +44,7 @@ export function SectionIndicator() {
   const current = sections[activeIndex];
 
   return (
-    <div className="fixed bottom-8 left-1/2 z-40 -translate-x-1/2">
+    <div className="fixed bottom-6 left-1/2 z-40 -translate-x-1/2">
       <AnimatePresence mode="wait">
         <motion.div
           key={current.id}
