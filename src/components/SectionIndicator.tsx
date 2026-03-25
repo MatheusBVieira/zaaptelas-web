@@ -9,6 +9,7 @@ const sections = [
   { id: "produtos", label: "Produtos" },
   { id: "como-funciona", label: "Como Funciona" },
   { id: "galeria", label: "Galeria" },
+  { id: "areas", label: "Áreas" },
   { id: "contato", label: "Contato" },
 ];
 

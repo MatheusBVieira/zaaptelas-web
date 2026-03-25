@@ -4,6 +4,7 @@ import { Diferenciais } from "@/components/Diferenciais";
 import { Produtos } from "@/components/Produtos";
 import { ComoFunciona } from "@/components/ComoFunciona";
 import { Galeria } from "@/components/Galeria";
+import { AreasAtendimento } from "@/components/AreasAtendimento";
 import { Contato } from "@/components/Contato";
 import { Footer } from "@/components/Footer";
 import { SectionIndicator } from "@/components/SectionIndicator";
@@ -18,6 +19,7 @@ export default function Home() {
         <Produtos />
         <ComoFunciona />
         <Galeria />
+        <AreasAtendimento />
         <Contato />
       </main>
       <Footer />

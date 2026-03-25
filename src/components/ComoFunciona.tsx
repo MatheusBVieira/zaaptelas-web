@@ -24,7 +24,7 @@ const etapas = [
   {
     numero: "03",
     titulo: "Instalação rápida",
-    descricao: "Acabamento aprovado na hora, com limpeza total após o serviço.",
+    descricao: "Acabamento aprovado na hora. Qualidade garantida.",
   },
 ];
 

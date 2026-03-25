@@ -109,8 +109,7 @@ export function Contato() {
               Pronto para respirar ar limpo?
             </h2>
             <p className="mt-4 text-creme/60">
-              Atendemos Campeche, Rio Tavares, Lagoa da Conceição, Armação e toda
-              a região sul de Florianópolis.
+              Medição gratuita e instalação rápida na região sul de Florianópolis.
             </p>
             <div className="mt-8">
               <WhatsAppButton
