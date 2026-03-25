@@ -73,7 +73,7 @@ export function Galeria() {
             </motion.p>
           </motion.div>
           <motion.div
-            className="mt-12 columns-1 gap-4 sm:columns-2 lg:columns-3"
+            className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
@@ -84,7 +84,7 @@ export function Galeria() {
                 key={foto.id}
                 variants={fadeUp}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="mb-4 cursor-pointer break-inside-avoid overflow-hidden border border-escuro/[0.08] transition-all duration-200 ease-out hover:border-dourado/40 hover:shadow-md"
+                className="cursor-pointer overflow-hidden border border-escuro/[0.08] transition-all duration-200 ease-out hover:border-dourado/40 hover:shadow-md"
                 onClick={() => openLightbox(index)}
                 role="button"
                 tabIndex={0}
@@ -96,13 +96,15 @@ export function Galeria() {
                 }}
                 aria-label={`Abrir foto: ${foto.alt}`}
               >
-                <Image
-                  src={foto.src}
-                  alt={foto.alt}
-                  width={foto.width}
-                  height={foto.height}
-                  className="w-full object-cover"
-                />
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={foto.src}
+                    alt={foto.alt}
+                    width={foto.width}
+                    height={foto.height}
+                    className="h-full w-full object-cover transition-transform duration-300 ease-out hover:scale-105"
+                  />
+                </div>
                 {foto.legenda && (
                   <p className="px-4 py-2 text-xs text-escuro/60">
                     {foto.legenda}
