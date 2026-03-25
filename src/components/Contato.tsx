@@ -109,7 +109,9 @@ export function Contato() {
               Pronto para respirar ar limpo?
             </h2>
             <p className="mt-4 text-creme/60">
-              Medição gratuita e instalação rápida na região sul de Florianópolis.
+              Atendimento no Campeche, Rio Tavares, Canto da Lagoa, Porto da
+              Lagoa, Lagoa da Conceição, Morro das Pedras, Armação, Pantano do
+              Sul, Açores e Ribeirão da Ilha.
             </p>
             <div className="mt-8">
               <WhatsAppButton
